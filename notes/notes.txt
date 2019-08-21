@@ -1,0 +1,12 @@
+
+# vid 01
+
+# setting up the project
+python3 -m venv venv
+. venv/bin/activate
+pip3 install flask
+mkdir Flask_Blog
+# create flaskblog.py with hello world example
+export FLASK_APP=flaskblog.py
+# to set debugger mode (seems activated by default)
+export FLASK_DEBUG=1
