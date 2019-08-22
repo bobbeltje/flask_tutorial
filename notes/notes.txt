@@ -10,3 +10,5 @@ mkdir Flask_Blog
 export FLASK_APP=flaskblog.py
 # to set debugger mode (seems activated by default)
 export FLASK_DEBUG=1
+# for input forms
+pip3 install flask-wtf
