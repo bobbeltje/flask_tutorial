@@ -12,3 +12,44 @@ export FLASK_APP=flaskblog.py
 export FLASK_DEBUG=1
 # for input forms
 pip3 install flask-wtf
+# ORM: object relational mapping for interacting with database
+# when changing database, python code will remain the same
+pip3 install flask-sqlalchemy
+# create database from the command line
+from flaskblog import db
+from flaskblog import User, Post
+db.create_all()
+# add and create users
+user_1 = User(username='Corey', email='C@demo.com', password='password')
+db.session.add(user_1)
+user_2 = User(username='JohnDoe', email='jd@demo.com', password='password')
+db.session.add(user_2)
+db.session.commit()
+# querying
+User.query.all()
+User.query.first()
+User.query.filter_by(username='Corey').all()
+User.query.filter_by(username='Corey').first()
+user = User.query.filter_by(username='Corey').first()
+user
+user.id
+user = User.query.get(1)
+user.posts
+# add some posts (using user.id)
+post_1 = Post(title='Blog 1', content='First Post Content!', user_id=user.id)
+post_2 = Post(title='Blog 2', content='Second Post Content!', user_id=user.id)
+db.session.add(post_1)
+db.session.add(post_2)
+db.session.commit()
+user.posts
+for post in user.posts:
+    print(post.title)
+post = Post.query.first()
+post
+post.user_id
+post.author
+# recreate database
+db.drop_all()
+db.create_all()
+User.query.all()
+Post.query.all()
