@@ -53,3 +53,8 @@ db.drop_all()
 db.create_all()
 User.query.all()
 Post.query.all()
+
+# for hashing passwords
+pip3 install flask-bcrypt
+# for login
+pip3 install flask-login
