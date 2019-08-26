@@ -58,3 +58,5 @@ Post.query.all()
 pip3 install flask-bcrypt
 # for login
 pip3 install flask-login
+# for resizing images
+pip3 install Pillow
