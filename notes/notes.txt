@@ -60,3 +60,8 @@ pip3 install flask-bcrypt
 pip3 install flask-login
 # for resizing images
 pip3 install Pillow
+
+# users
+CoreyMSchafer@gmail.com
+TestUser@demo.com
+password: testing
