@@ -65,3 +65,14 @@ pip3 install Pillow
 CoreyMSchafer@gmail.com
 TestUser@demo.com
 password: testing
+
+# adding data in vid09
+from flaskblog import db
+from flaskblog.models import User, Post
+import json
+with open('../notes/sample_data.json') as f: 
+    d = json.load(f) 
+for p in d: 
+    post = Post(title=p['title'], content=p['content'], user_id=p['user_id']) 
+    db.session.add(post)
+db.session.commit()
