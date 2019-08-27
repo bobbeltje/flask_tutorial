@@ -66,6 +66,8 @@ CoreyMSchafer@gmail.com
 TestUser@demo.com
 password: testing
 
+# vid 09
+
 # adding data in vid09
 from flaskblog import db
 from flaskblog.models import User, Post
@@ -76,3 +78,7 @@ for p in d:
     post = Post(title=p['title'], content=p['content'], user_id=p['user_id']) 
     db.session.add(post)
 db.session.commit()
+
+# vid 10
+
+pip3 install flask-mail
