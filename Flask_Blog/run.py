@@ -1,7 +1,7 @@
 
-# the app variable needs to exist in __init__
-from flaskblog import app
+from flaskblog import create_app
 
-# to run the app without setting environmental variables
+app = create_app()
+
 if __name__ == '__main__':
     app.run(debug=True)
