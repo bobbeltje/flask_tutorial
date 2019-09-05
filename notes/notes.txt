@@ -82,3 +82,35 @@ db.session.commit()
 # vid 10
 
 pip3 install flask-mail
+
+# vid 13
+
+# to create pip requirements file:
+pip freeze > requirements.txt
+# mv blog to server
+scp -r Flask_Blog/ user@ip:~/
+# prepare server
+sudo apt install python3-pip
+sudo apt install python3-venv
+python3 -m venv Flask_Blog/venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# create config file (instead of using os.environ.get)
+sudo nano /etc/config.json 
+# enter:
+{
+        "SECRET_KEY": "beaadd39d35e24a7746cce7a6397632a",
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///site.db" ,
+        "EMAIL_USER": "myemail@example.com",
+        "EMAIL_PASS": "my_password"
+}
+# and save
+# edit flaskblog/config.py and add at the top:
+with open('etc/config.json') as config_file:
+    config = json.load(config_file)
+# then change all os.environ.get to config.get
+# and save
+
+export FLASK_APP=run.py
+flask run --host=0.0.0.0  # to make the app visible to the outside
