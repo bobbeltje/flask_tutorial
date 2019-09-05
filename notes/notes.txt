@@ -114,3 +114,32 @@ with open('etc/config.json') as config_file:
 
 export FLASK_APP=run.py
 flask run --host=0.0.0.0  # to make the app visible to the outside
+
+# 48:31 set up nginx
+sudo apt install nginx
+pip install gunicorn  # make sure you're still in virtual envionment
+
+sudo mv /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bakup
+sudo nano /etc/nginx/sites-enabled/flaskblog
+# put
+server {
+    listen 80;
+    server_name YOUR_IP_OR_DOMAIN;
+
+    location /static {
+        alias /home/YOUR_USER/Flask_Blog/flaskblog/static;
+    }
+
+    location / {
+        proxy_pass http://localhost:8000;
+        include /etc/nginx/proxy_params;
+        proxy_redirect off;
+    }
+}
+# and save
+
+sudo ufw allow http/tcp
+sudo ufw delete allow 5000
+sudo ufw enable
+sudo systemctl restart nginx
+
