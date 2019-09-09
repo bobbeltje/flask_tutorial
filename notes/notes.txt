@@ -143,3 +143,28 @@ sudo ufw delete allow 5000
 sudo ufw enable
 sudo systemctl restart nginx
 
+# gunicorn for handling the nginx stuff
+gunicorn -w 3 run:app
+# -w : number of workers, according to gunicorn: 2*cores +1
+
+# supervisor to restart on crash, autostart on server start etc
+sudo apt install supervisor
+sudo nano /etc/supervisor/conf.d/flaskblog.conf
+# put
+[program:flaskblog]
+directory=/home/YOUR_USER/YOUR_PROJECT
+command=/home/YOUR_USER/YOUR_PROJECT/venv/bin/gunicorn -w 3 run:app
+user=YOUR_USER
+autostart=true
+autorestart=true
+stopasgroup=true
+killasgroup=true
+stderr_logfile=/var/log/flaskblog/flaskblog.err.log
+stdout_logfile=/var/log/flaskblog/flaskblog.out.log
+# and save
+# create log folders and files
+sudo mkdir -p /var/log/flaskblog
+sudo touch /var/log/flaskblog/flaskblog.err.log
+sudo touch /var/log/flaskblog/flaskblog.out.log
+# restart supervisor
+sudo supervisorctl reload
