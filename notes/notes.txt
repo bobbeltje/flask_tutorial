@@ -168,3 +168,10 @@ sudo touch /var/log/flaskblog/flaskblog.err.log
 sudo touch /var/log/flaskblog/flaskblog.out.log
 # restart supervisor
 sudo supervisorctl reload
+
+# vid 14
+
+# get domain name (eg, namecheap)
+# for domain name, set name servers to server (eg, hetzner)
+# add dns entry to hetzner
+# set reverse dns to url
