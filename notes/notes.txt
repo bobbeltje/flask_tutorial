@@ -175,3 +175,28 @@ sudo supervisorctl reload
 # for domain name, set name servers to server (eg, hetzner)
 # add dns entry to hetzner
 # set reverse dns to url
+
+# vid 15
+
+# https://letsencrypt.org/
+# get started page
+# certbot
+# fill in nginx / ubuntu 18
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot python-certbot-nginx
+sudo nano /etc/nginx/sites-enabled/flaskblog
+# change server_name to bobbeltje.com
+sudo certbot --nginx
+# choose option 2: redirect 
+# test nginx
+sudo nginx -t
+# need to allow https
+sudo ufw allow https
+sudo systemctl restart nginx
+# certificates run out every 90 days or so
+# to simulate a renewal of the certificate:
+sudo certbot renew --dry-run
