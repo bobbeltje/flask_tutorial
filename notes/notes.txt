@@ -200,3 +200,10 @@ sudo systemctl restart nginx
 # certificates run out every 90 days or so
 # to simulate a renewal of the certificate:
 sudo certbot renew --dry-run
+
+# set up cron job to renew certificate every 30 days
+sudo crontab -e
+# choose nano editor
+# at the end put
+30 4 1 * * sudo certbot renew --quiet
+# 30 minutes, 4 o'clock, 1st day of month, any month, any weekday
